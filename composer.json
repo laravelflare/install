@@ -23,8 +23,7 @@
     },
     "require": {
         "symfony/console": "~2.3",
-        "symfony/process": "~2.3",
-        "laravelflare/flare": "^0.1.0"
+        "symfony/process": "~2.3"
     },
     "bin": [
         "flare"

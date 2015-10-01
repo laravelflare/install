@@ -27,13 +27,6 @@ class InstallCommand extends Command
                 InputArgument::OPTIONAL,
                 "Provides a completely clean Laravel install with Flare on top."
             );
-            // ->addOption(
-            //     'clean',
-            //     null,
-            //     InputOption::VALUE_NONE,
-            //     "Do you want a clean install of Laravel with this installation?  (Y/N)
-            //     \r\n Default to `no` and installs Flare on top of your current project."
-            // );
     }
 
     /**
@@ -46,13 +39,7 @@ class InstallCommand extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $cleanInstall = $input->getArgument('clean');
-
-        if (strcasecmp($cleanInstall, 'Y') !== 0) {
-            $cleanInstall = false;
-        } else {
-            $cleanInstall = true;
-        }
+        $cleanInstall = $input->getArgument('clean') ? true : false;
 
         if ($cleanInstall) {
             $this->installLaravel($this->findComposer(), $output);

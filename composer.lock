@@ -4,51 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "a7c38465e516a5061e1e34faf197b4d8",
-    "content-hash": "ac7472a5e373181f94d1533f590b88fe",
+    "hash": "19acc4f19a2afba5cfc0e705fa4efbef",
     "packages": [
-        {
-            "name": "laravelflare/flare",
-            "version": "0.1.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/laravelflare/flare.git",
-                "reference": "f395c8be5d3de54c38256ecaf2fe30331ef10a30"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/laravelflare/flare/zipball/f395c8be5d3de54c38256ecaf2fe30331ef10a30",
-                "reference": "f395c8be5d3de54c38256ecaf2fe30331ef10a30",
-                "shasum": ""
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "LaravelFlare\\Flare\\": "src/Flare"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Laravel Flare",
-                    "homepage": "https://github.com/laravelflare"
-                },
-                {
-                    "name": "Aden Fraser",
-                    "email": "aden@jacobbailey.com",
-                    "homepage": "https://github.com/AdenFraser"
-                }
-            ],
-            "description": "Laravel Flare",
-            "homepage": "https://github.com/JacobBaileyLtd/flare",
-            "keywords": [
-                "laravel"
-            ],
-            "time": "2015-10-01 21:17:18"
-        },
         {
             "name": "symfony/console",
             "version": "v2.7.5",
