@@ -1,0 +1,32 @@
+{
+    "name": "laravelflare/install",
+    "description": "Installs Flare as a new project or on an existing Laravel project.",
+    "keywords": [
+        "Laravel", "Flare"
+    ],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Laravel Flare",
+            "homepage": "https://github.com/laravelflare"
+        },
+        {
+            "name": "Aden Fraser",
+            "email": "aden@jacobbailey.com",
+            "homepage": "https://github.com/AdenFraser"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "LaravelFlare\\Install\\": "src/"
+        }
+    },
+    "require": {
+        "symfony/console": "~2.3",
+        "symfony/process": "~2.3",
+        "laravelflare/flare": "^0.1.0"
+    },
+    "bin": [
+        "flare"
+    ]
+}
