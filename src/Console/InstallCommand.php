@@ -46,6 +46,8 @@ class InstallCommand extends Command
         }
 
         $this->installFlare($this->findComposer(), $output);
+
+        $this->updateAppConfig();
     }
 
     /**
@@ -55,7 +57,7 @@ class InstallCommand extends Command
      */
     private function installLaravel($composer, OutputInterface $output)
     {
-        $process = new Process($composer . ' require laravel/laravel=~5.1', null, null, null, null);
+        $process = new Process($composer . ' create-project laravel/laravel=~5.1 . --prefer-dist', null, null, null, null);
         $process->run(function ($type, $line) use ($output) {
             $output->write($line);
         });
@@ -72,6 +74,51 @@ class InstallCommand extends Command
         $process->run(function ($type, $line) use ($output) {
             $output->write($line);
         });
+    }
+
+    /**
+     * Adds the FlareServiceProvider to the config/app.php file 
+     * if it hasn't already been addedd.
+     * 
+     * @return void
+     */
+    private function updateAppConfig()
+    {
+        if ($this->fileContains(getcwd().'/config/app.php', 'LaravelFlare\Flare\FlareServiceProvider')) {
+            return;
+        }
+
+        $this->fileSearchReplace(
+            getcwd().'/config/app.php',
+            'App\Providers\EventServiceProvider::class,',
+            "App\Providers\EventServiceProvider::class,\r\n        LaravelFlare\Flare\FlareServiceProvider::class,");
+    }
+
+    /**
+     * Determines if a File contains a given string.
+     * 
+     * @param  string $file   
+     * @param  string $search 
+     * 
+     * @return int
+     */
+    private function fileContains($file, $search)
+    {
+        return strpos(file_get_contents($file), $search);
+    }
+   
+    /**
+     * Performs a search and replace on a given file.
+     * 
+     * @param  string $file   
+     * @param  string $search 
+     * @param  string $replace
+     * 
+     * @return void
+     */
+    private function fileSearchReplace($file, $search, $replace)
+    {
+        file_put_contents($file, str_replace($search, $replace, file_get_contents($file)));
     }
 
     /**
