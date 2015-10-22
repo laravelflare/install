@@ -28,10 +28,11 @@ class InstallCommand extends Command
                 "Provides a completely clean Laravel install with Flare on top."
             )
             ->addOption(
-                'version',
+                'release',
                 null,
-                InputOption::VALUE_NONE,
-                'Allows specifying the version of Flare to install.'
+                InputOption::VALUE_REQUIRED,
+                'Allows specifying the release version of Flare to install.',
+                ''
             );
     }
 
@@ -51,7 +52,7 @@ class InstallCommand extends Command
             $this->installLaravel($this->findComposer(), $output);
         }
 
-        $this->installFlare($this->findComposer(), $output);
+        $this->installFlare($this->findComposer(), $input, $output);
 
         $this->updateAppConfig();
     }
@@ -74,9 +75,9 @@ class InstallCommand extends Command
      * 
      * @return void
      */
-    private function installFlare($composer, OutputInterface $output)
+    private function installFlare($composer, InputInterface $input, OutputInterface $output)
     {
-        $version = $input->getOption('version') ? '=' . $input->getOption('version') : '';
+        $version = $input->getOption('release') ? '=' . $input->getOption('release') : '';
         $process = new Process($composer . ' require laravelflare/flare'. $version, null, null, null, null);
         $process->run(function ($type, $line) use ($output) {
             $output->write($line);
