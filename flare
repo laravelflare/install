@@ -8,5 +8,5 @@ if (file_exists(__DIR__.'/vendor/autoload.php')) {
 }
 
 $app = new Symfony\Component\Console\Application('Flare Installer', '0.2.0');
-$app->add(new LaravelFlare\Install\Console\InstallCommand);
+$app->add(new LaravelFlare\Install\Console\InstallCommand());
 $app->run();

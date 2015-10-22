@@ -13,8 +13,6 @@ class InstallCommand extends Command
 {
     /**
      * Configure the command options.
-     *
-     * @return void
      */
     protected function configure()
     {
@@ -25,7 +23,7 @@ class InstallCommand extends Command
             ->addArgument(
                 'clean',
                 InputArgument::OPTIONAL,
-                "Provides a completely clean Laravel install with Flare on top."
+                'Provides a completely clean Laravel install with Flare on top.'
             )
             ->addOption(
                 'release',
@@ -39,10 +37,8 @@ class InstallCommand extends Command
     /**
      * Execute the command.
      *
-     * @param InputInterface $input
+     * @param InputInterface  $input
      * @param OutputInterface $output
-     * 
-     * @return void
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
@@ -58,27 +54,23 @@ class InstallCommand extends Command
     }
 
     /**
-     * Installs Laravel
-     * 
-     * @return void
+     * Installs Laravel.
      */
     private function installLaravel($composer, OutputInterface $output)
     {
-        $process = new Process($composer . ' create-project laravel/laravel=~5.1 . --prefer-dist', null, null, null, null);
+        $process = new Process($composer.' create-project laravel/laravel=~5.1 . --prefer-dist', null, null, null, null);
         $process->run(function ($type, $line) use ($output) {
             $output->write($line);
         });
     }
 
     /**
-     * Install Flare
-     * 
-     * @return void
+     * Install Flare.
      */
     private function installFlare($composer, InputInterface $input, OutputInterface $output)
     {
-        $version = $input->getOption('release') ? '=' . $input->getOption('release') : '';
-        $process = new Process($composer . ' require laravelflare/flare'. $version, null, null, null, null);
+        $version = $input->getOption('release') ? '='.$input->getOption('release') : '';
+        $process = new Process($composer.' require laravelflare/flare'.$version, null, null, null, null);
         $process->run(function ($type, $line) use ($output) {
             $output->write($line);
         });
@@ -87,8 +79,6 @@ class InstallCommand extends Command
     /**
      * Adds the FlareServiceProvider to the config/app.php file 
      * if it hasn't already been addedd.
-     * 
-     * @return void
      */
     private function updateAppConfig()
     {
@@ -105,8 +95,8 @@ class InstallCommand extends Command
     /**
      * Determines if a File contains a given string.
      * 
-     * @param  string $file   
-     * @param  string $search 
+     * @param string $file
+     * @param string $search
      * 
      * @return int
      */
@@ -114,15 +104,13 @@ class InstallCommand extends Command
     {
         return strpos(file_get_contents($file), $search);
     }
-   
+
     /**
      * Performs a search and replace on a given file.
      * 
-     * @param  string $file   
-     * @param  string $search 
-     * @param  string $replace
-     * 
-     * @return void
+     * @param string $file
+     * @param string $search
+     * @param string $replace
      */
     private function fileSearchReplace($file, $search, $replace)
     {
@@ -136,10 +124,10 @@ class InstallCommand extends Command
      */
     private function findComposer()
     {
-        if (!file_exists(getcwd() . '/composer.phar')) {
+        if (!file_exists(getcwd().'/composer.phar')) {
             return 'composer';
         }
 
-        return '"' . PHP_BINARY . '" composer.phar"';
+        return '"'.PHP_BINARY.'" composer.phar"';
     }
 }
