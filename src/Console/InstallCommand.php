@@ -22,10 +22,16 @@ class InstallCommand extends Command
         $this
             ->setName('install')
             ->setDescription('Install Flare into the current directory.')
-             ->addArgument(
+            ->addArgument(
                 'clean',
                 InputArgument::OPTIONAL,
                 "Provides a completely clean Laravel install with Flare on top."
+            )
+            ->addOption(
+                'version',
+                null,
+                InputOption::VALUE_NONE,
+                'Allows specifying the version of Flare to install.'
             );
     }
 
@@ -70,7 +76,8 @@ class InstallCommand extends Command
      */
     private function installFlare($composer, OutputInterface $output)
     {
-        $process = new Process($composer . ' require laravelflare/flare', null, null, null, null);
+        $version = $input->getOption('version') ? '=' . $input->getOption('version') : '';
+        $process = new Process($composer . ' require laravelflare/flare'. $version, null, null, null, null);
         $process->run(function ($type, $line) use ($output) {
             $output->write($line);
         });
