@@ -88,8 +88,8 @@ class InstallCommand extends Command
 
         $this->fileSearchReplace(
             getcwd().'/config/app.php',
-            'App\Providers\EventServiceProvider::class,',
-            "App\Providers\EventServiceProvider::class,\r\n        LaravelFlare\Flare\FlareServiceProvider::class,");
+            'App\Providers\RouteServiceProvider::class,',
+            "App\Providers\RouteServiceProvider::class,\r\n        LaravelFlare\Flare\FlareServiceProvider::class,");
     }
 
     /**
