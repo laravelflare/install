@@ -45,7 +45,7 @@ class InstallCommand extends Command
         $cleanInstall = $input->getArgument('clean') ? true : false;
 
         if ($cleanInstall) {
-            $this->installLaravel($this->findComposer(), $output);
+            $this->installLaravel($this->findComposer(), $input, $output);
         }
 
         $this->installFlare($this->findComposer(), $input, $output);
@@ -56,9 +56,9 @@ class InstallCommand extends Command
     /**
      * Installs Laravel.
      */
-    private function installLaravel($composer, OutputInterface $output)
+    private function installLaravel($composer, InputInterface $input, OutputInterface $output)
     {
-        $process = new Process($composer.' create-project laravel/laravel=~5.1 . --prefer-dist', null, null, null, null);
+        $process = new Process($composer.' create-project laravel/laravel=~5.2 . --prefer-dist', null, null, null, null);
         $process->run(function ($type, $line) use ($output) {
             $output->write($line);
         });
